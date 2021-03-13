@@ -88,3 +88,6 @@ pypy3_ds
 
 # dev env
 .vscode
+.idea
+
+target
