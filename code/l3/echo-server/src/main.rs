@@ -8,9 +8,18 @@ fn main() {
     let listener = TcpListener::bind("127.0.0.1:8888").unwrap();
 
     for stream in listener.incoming() {
-        let stream = stream.unwrap();
+        // let stream = stream.unwrap();
 
-        handle_connection(stream);
+        match stream {
+            Ok(tcp_stream) => {
+                handle_connection(tcp_stream);
+            }
+            Err(e) => {
+                panic!("Get Error: {}", e);
+            }
+        }
+
+
     }
 }
 
@@ -18,6 +27,7 @@ fn handle_connection(mut stream: TcpStream) {
     let mut buffer = [0; 1024];
 
     stream.read(&mut buffer).unwrap();
+
 
     let response = format!("Echo: {}", String::from_utf8_lossy(&buffer[..]));
 
