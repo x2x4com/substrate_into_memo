@@ -90,4 +90,4 @@ pypy3_ds
 .vscode
 .idea
 
-target
+target/*
